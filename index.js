@@ -10,7 +10,6 @@ const app = express();
 const PORT = 9000;
 
 const MONGO_URL = process.env.MONGO_URL;
-// mongodb+srv://kesavan_8072:<password>@cluster0.1nxxz.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 const movies = [{
     "id": "100",
@@ -123,6 +122,17 @@ app.get('/movies/:id', async(req, res) => {
 });
 
 
+app.delete('/movies/:id', async(req, res) => {
+    console.log(req.params);
+    const {id}=req.params;
+    // const findedMovie = movies.find((mv)=>mv.id===id);
+    const client = await createConnection();
+    const notFound = {message:"Movie Not Found"};
+    const movie = await client.db("movieDb").collection("movies").deleteOne({id:id})
+    // res.send(findedMovie);
+    movie?res.send(movie):res.send(notFound);
+});
+
 app.post('/movies', async(req, res) => {
     // console.log(req.params);
     const data = req.body;
@@ -131,6 +141,19 @@ app.post('/movies', async(req, res) => {
     const client = await createConnection();
     // const notFound = {message:"Movie Not Found"};
     const result = await client.db("movieDb").collection("movies").insertMany(data)
+    res.send(result);
+
+});
+
+app.put('/movies/:id', async(req, res) => {
+    // console.log(req.params);
+    const {id}=req.params;
+    const data = req.body;
+    console.log(data);
+ 
+    const client = await createConnection();
+    // const notFound = {message:"Movie Not Found"};
+    const result = await client.db("movieDb").collection("movies").updateOne({id:id},{$set:data})
     res.send(result);
 
 });
