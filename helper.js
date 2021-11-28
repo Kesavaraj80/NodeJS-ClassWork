@@ -8,7 +8,7 @@
     return await client.db("movieDb").collection("movies").insertMany(data);
 }
  async function deleteMovieById(id) {
-    return await client.db("movieDb").collection("movies").deleteOe({ id: id });
+    return await client.db("movieDb").collection("movies").deleteOne({ id: id });
 }
  async function getMovieById(id) {
     return await client.db("movieDb").collection("movies").findOne({ id: id });
