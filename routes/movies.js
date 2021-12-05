@@ -8,10 +8,10 @@ import {
     addMovies,
     updateMovie
 } from '../helper.js'
-
+import {auth} from "../middleware/auth.js"
 router
     .route('/')
-    .get(cors(),async (req, res) => {
+    .get(auth,cors(),async (req, res) => {
         console.log(req.query);
         const filter = req.query;
         // let filteredMovie = movies;
@@ -24,7 +24,7 @@ router
 
         res.send(movie);
     })
-    .post(cors(),async (req, res) => {
+    .post(auth,cors(),async (req, res) => {
         // console.log(req.params);
         const data = req.body;
         console.log(data);
@@ -38,7 +38,7 @@ router
 
 router
     .route('/:id')
-    .get(cors(),async (req, res) => {
+    .get(auth,cors(),async (req, res) => {
         console.log(req.params);
         const { id } = req.params;
         // const findedMovie = movies.find((mv)=>mv.id===id);
@@ -56,7 +56,7 @@ router
         // res.send(findedMovie);
         movie ? res.send(movie) : res.send(notFound);
     })
-    .put(cors(),async (req, res) => {
+    .put(auth,cors(),async (req, res) => {
         // console.log(req.params);
         const { id } = req.params;
         const data = req.body;
