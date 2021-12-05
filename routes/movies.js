@@ -1,5 +1,6 @@
 import express from "express";
 const router = express.Router();
+import cors from "cors";
 import {
     getMovies,
     getMovieById,
@@ -10,7 +11,7 @@ import {
 
 router
     .route('/')
-    .get(async (req, res) => {
+    .get(cors(),async (req, res) => {
         console.log(req.query);
         const filter = req.query;
         // let filteredMovie = movies;
@@ -23,7 +24,7 @@ router
 
         res.send(movie);
     })
-    .post(async (req, res) => {
+    .post(cors(),async (req, res) => {
         // console.log(req.params);
         const data = req.body;
         console.log(data);
@@ -37,7 +38,7 @@ router
 
 router
     .route('/:id')
-    .get(async (req, res) => {
+    .get(cors(),async (req, res) => {
         console.log(req.params);
         const { id } = req.params;
         // const findedMovie = movies.find((mv)=>mv.id===id);
@@ -46,7 +47,7 @@ router
         // res.send(findedMovie);
         movie ? res.send(movie) : res.send(notFound);
     })
-    .delete( async (req, res) => {
+    .delete( cors(), async (req, res) => {
         console.log(req.params);
         const { id } = req.params;
         // const findedMovie = movies.find((mv)=>mv.id===id);
@@ -55,7 +56,7 @@ router
         // res.send(findedMovie);
         movie ? res.send(movie) : res.send(notFound);
     })
-    .put(async (req, res) => {
+    .put(cors(),async (req, res) => {
         // console.log(req.params);
         const { id } = req.params;
         const data = req.body;

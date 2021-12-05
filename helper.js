@@ -5,7 +5,7 @@
     return await client.db("movieDb").collection("movies").updateOne({ id: id }, { $set: data });
 }
  async function addMovies(data) {
-    return await client.db("movieDb").collection("movies").insertMany(data);
+    return await client.db("movieDb").collection("movies").insertOne(data);
 }
 
 
