@@ -7,6 +7,9 @@
  async function addMovies(data) {
     return await client.db("movieDb").collection("movies").insertMany(data);
 }
+
+
+
  async function deleteMovieById(id) {
     return await client.db("movieDb").collection("movies").deleteOne({ id: id });
 }
@@ -17,8 +20,22 @@
     return await client.db("movieDb").collection("movies").find(filter).toArray();
 }
 
+// Users Router Function
+async function createUser(data) {
+    console.log("inserted")
+    return await client.db("movieDb").collection("users").insertOne(data);
+}
+
+
+async function getUserByusername(username) {
+    return await client.db("movieDb").collection("users").findOne({ username:username });
+}
+
 export { getMovies, 
     getMovieById, 
     deleteMovieById, 
     addMovies, 
-    updateMovie };
+    updateMovie,
+    createUser,
+    getUserByusername 
+};

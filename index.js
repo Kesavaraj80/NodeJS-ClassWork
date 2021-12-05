@@ -3,6 +3,7 @@ import express from 'express';
 import {MongoClient} from 'mongodb';
 import dotenv from "dotenv";
 import { moviesRouter } from './routes/movies.js';
+import { usersRouter } from './routes/users.js';
 // import bcrypt from "bcrypt";
 // import { getMovies, 
 //     getMovieById, 
@@ -44,7 +45,10 @@ app.get('/', (req, res) => {
 
 
 
-app.use('/movies', moviesRouter)
+app.use('/movies', moviesRouter);
+
+app.use('/users', usersRouter)
+
 
 app.listen(PORT, () => console.log("App is Started"));
 
