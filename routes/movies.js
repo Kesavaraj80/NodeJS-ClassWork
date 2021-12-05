@@ -61,10 +61,8 @@ router
         const { id } = req.params;
         const data = req.body;
         console.log(data);
-
-        const client = await createConnection();
         // const notFound = {message:"Movie Not Found"};
-        const result = await updateMovie(client, id, data);
+        const result = await updateMovie(id, data);
         res.send(result);
 
     });
